@@ -65,8 +65,7 @@ Events handled: fall detected, caught (swing-up to balance), balance lost (back 
 | `simulate.py` | Pygame live simulation |
 | `figures/` | generated graphs (fig0 to fig12) |
 | `results_table.md` | Euler vs RK4 table |
-| `GUIDE.md` | study guide and viva questions |
-| `REPORT_TEMPLATE.md` | report structure |
+| `GUIDE.md` | study guide  |
 | `requirements.txt` | numpy, matplotlib, pygame |
 
 
