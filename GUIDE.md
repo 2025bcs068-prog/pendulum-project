@@ -26,12 +26,12 @@ A broom (rod with a weight at the end, length L) is held by a hand (the pivot) t
 - Angle theta is measured from **upright**. theta = 0 is up, theta = pi (180 degrees) is hanging down.
 - The hand has acceleration a. This is our control: a is the "push" we choose.
 
-## 3. Building the equation (explain this in the demo)
+## 3. Building the equation
 Torque balance about the pivot gives:
 
     theta'' = (g/L) sin(theta) - b theta' - (a/L) cos(theta)
 
-Read each term:
+each term:
 - (g/L) sin(theta): gravity. Near the top it **pulls the pendulum away** (instability).
 - b theta': damping (air and friction). It removes energy.
 - (a/L) cos(theta): the effect of moving the hand.
@@ -98,13 +98,13 @@ So we choose the sign of a to make dE/dt positive:
 
 Each swing adds energy, like pushing a child on a swing. When theta is within 0.35 rad (20 degrees) of the top and slow enough, the program **switches to PD balance**. If it falls past 1.2 rad, it goes back to swing-up. That is a small "hybrid" controller with two modes.
 
-## 9. Validation (10 marks, do not skip)
+## 9. Validation 
 1. Small-angle formula: for a small swing around hanging with no damping, theta = phi0 cos(sqrt(g/L) t). Our RK4 agrees within 0.04 degrees (figure 4).
 2. Energy conservation: with b = 0 and a = 0, energy must stay constant. RK4 keeps it, Euler drifts (figure 3).
 3. Reference solution: RK4 with a tiny step (dt = 0.0005) is the "almost exact" answer for the error graphs (figures 1 and 2).
 4. Numerical failure versus physical failure: figure 8. Same physics, same controller, only the solver changed. Euler with dt = 0.1 never catches the pendulum, RK4 with the same dt does. So that failure is **numerical**, not physical.
 
-## 10. Graphs you get (put them in the report)
+## 10. Graphs
 | File | What it shows |
 |---|---|
 | fig1 | Euler and RK4 at three step sizes against the reference |
@@ -122,7 +122,7 @@ Each swing adds energy, like pushing a child on a swing. When theta is within 0.
 | fig12 | controller logic (two modes, two switching rules) |
 | results_table.md | Euler vs RK4 error, steps and cost at three step sizes |
 
-## 11. Live demo plan (10 minutes) and keys
+## 11. Live demo 
 Keys: R hanging start | B balance start | M manual (you balance it) | A auto | O controller off | SPACE push | E Euler/RK4 | D step size | [ ] pendulum length | K damping | H labels | ESC quit
 
 1. Press M and try to balance it by hand (hold LEFT and RIGHT). It falls. Say: "The upright position is unstable, as the eigenvalue +3.13 predicts." The program shows "FALL DETECTED" (event handling).
@@ -133,31 +133,8 @@ Keys: R hanging start | B balance start | M manual (you balance it) | A auto | O
 6. Press E and D: Euler with a big step fails, RK4 does not. Explain with figure 2 and figure 8.
 7. Close with figure 11 (phase portrait) and the results table.
 
-## 12. Questions your lecturer may ask (every member should answer these)
-1. Why do we convert a second-order equation into a first-order system?
-2. Why is Euler order 1 and RK4 order 4? What does that mean in practice?
-3. Why does the pendulum fall without control? (positive eigenvalue)
-4. Why must Kp be larger than g?
-5. What does the D term do?
-6. How does swing-up know when to stop adding energy?
-7. What are the limits of the model? (no motor limits except A_MAX, no friction in the pivot, a rigid rod, the hand is perfectly controlled)
-8. How did you know your code is right? (validation list in section 9)
 
-## 13. Report skeleton (follow the handbook for page limits and exact names)
-1. Problem and objectives
-2. Model: diagram, assumptions, parameters and units, equations, first-order form
-3. Method: Euler, RK4, controllers (with the formulas above)
-4. Results: figures 1 to 8, each with 2 or 3 sentences of meaning
-5. Validation and limitations
-6. Conclusion and future work (for example: real cart with motor, noise in sensors)
-7. How to run the code
-
-## 14. Honest advice
-- Know every line you present. Change a gain, re-run, and watch what happens: that is the best way to learn.
-- Do not claim things you did not test.
-- Record a screen video of the demo as a backup.
-
-## 15. New: how to read the extra graphs (explain these to score "interpretation")
+## 12. New: how to read the extra graphs 
 **Phase portrait (fig11).** The horizontal axis is the angle, the vertical axis is the angular velocity. Each curve is one possible motion.
 - Near the top (red dot) the curves are pushed away along one direction and attracted along another. This shape is called a **saddle**. It is the picture of an unstable equilibrium: one positive eigenvalue and one negative.
 - Near the bottom (green dots) the curves spiral inwards. The pendulum comes to rest. This is a **stable** equilibrium (damping makes it a spiral).
@@ -170,11 +147,11 @@ Keys: R hanging start | B balance start | M manual (you balance it) | A auto | O
 - Swing-up plus balance: it works up to 1.0 m and fails to catch at 1.3 m and longer.
 - Meaning: a longer pendulum is slower, so the same gains and the same catch rules no longer fit. This is the same lesson as the video, where extra weight on the pole was a test of robustness. (In our simple model the mass cancels, so we change the length instead. State this assumption in the report.)
 
-**Numerical versus physical failure (the handbook asks for this).**
+**Numerical versus physical failure.**
 - Physical instability: the equation itself pushes the pendulum away from the top (positive eigenvalue). RK4 with a tiny step shows it too. Example: controller OFF.
 - Numerical error: the equation is fine but the solver is not accurate enough. Example: Euler with dt = 0.1 never catches the pendulum, while RK4 with the same dt does (figure 8). Rule: if the failure disappears when you make dt smaller or switch to RK4, it was numerical.
 
-## 16. Honest limits of the model (write these in the report)
+## 13. Honest limits of the model (write these in the report)
 - The pivot is moved directly by an acceleration a. A real cart has a motor, voltage, friction and a limited rail. We model only the acceleration limit (+/- 25 m/s^2) and the rail ends (warning only).
 - The pole is a point mass on a massless rod. Real poles have their own inertia.
 - No sensor noise and no time delay.
