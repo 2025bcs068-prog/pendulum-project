@@ -1,7 +1,7 @@
 # Inverted Pendulum on a Cart: Swing-up and Balance
-Differential Equations group project (Project 7, Inverted Pendulum Challenge)
+Differential Equations group project ( Inverted Pendulum Challenge)
 
-A virtual version of the "pole on a cart" laboratory rig: the pendulum starts hanging down, is swung up by an energy controller, caught, and balanced by a PD controller. Euler and RK4 are written by us (no ready-made ODE solver, no physics engine).
+A virtual version of the "pole on a cart" laboratory rig, with a mass on the tip: the pendulum starts hanging down, is swung up by an energy controller, caught, and balanced by a PD controller. Euler and RK4 are written by us (no ready-made ODE solver, no physics engine).
 
 ## Setup
 ```
@@ -24,14 +24,8 @@ python simulate.py    # live animated simulation (keys are listed at the top of 
 | compare.py | numerical comparison, experiments, validation, all figures |
 | simulate.py | Pygame live simulation (all motion comes from the numerical states) |
 | GUIDE.md | study guide: theory, how to read each graph, demo plan, viva questions |
-| REPORT_TEMPLATE.md | 1-3 page report structure linked to the marking scheme |
 
-## Marking scheme -> where the evidence is
-| Component (marks) | Evidence in this project |
-|---|---|
-| Formulation, assumptions, ODEs (25) | fig0, GUIDE sections 2-4, `f()` in pendulum.py, section 16 limits |
-| Independent Euler and RK4 (25) | `euler_step`, `rk4_step` in pendulum.py (hand written) |
-| Numerical comparison and experiments (20) | fig1, fig2, fig3, results_table.md; experiments fig5 (gain), fig6 (start angle), fig9 (damping), fig10 (length), step size fig8 |
-| Interactive simulation and events (15) | simulate.py: push, manual mode, fall detection, catch/lost-balance events, track limit, solver blow-up |
-| Validation and limitations (10) | fig4 (small-angle formula), fig3 (energy), fig8 (numerical vs physical), GUIDE section 16 |
+
+
+fig3 (energy), fig8 (numerical vs physical), GUIDE section 16 |
 | Report, code quality, demo (5) | REPORT_TEMPLATE.md, comments in code, GUIDE section 11 |
